@@ -1,15 +1,16 @@
 services:
   - type: web
-    name: python-builder-bot
-    runtime: python
-    buildCommand: pip install -r requirements.txt
+    name: linkedin-bot
+    runtime: python3
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
     startCommand: python main.py
+    plan: free
     envVars:
       - key: TELEGRAM_BOT_TOKEN
-        sync: false
+        required: true
       - key: GROQ_API_KEY
-        sync: false
+        required: false
       - key: LINKEDIN_ACCESS_TOKEN
-        sync: false
-    healthCheckPath: /health
-    autoDeploy: true
+        required: false
