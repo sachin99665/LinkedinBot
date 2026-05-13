@@ -1,0 +1,33 @@
+kind = "web"
+previewPath = "/"
+title = "Telegram Bot"
+version = "1.0.0"
+id = "artifacts/bot-status"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22053
+
+[services.development]
+run = "pnpm --filter @workspace/bot-status run dev"
+
+[services.production]
+
+[services.production.build]
+args = ["pnpm", "--filter", "@workspace/bot-status", "run", "build"]
+
+[services.production.run]
+args = ["bash", "start_prod.sh"]
+
+[services.production.run.env]
+PORT = "22053"
+
+[services.env]
+PORT = "22053"
+BASE_PATH = "/"
